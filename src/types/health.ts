@@ -114,17 +114,35 @@ export interface EmergencyContact {
   name: string;
   relationship: string;
   phone: string;
+  altPhone?: string;
+  location?: string;
+  notes?: string;
   isPrimary: boolean;
+}
+
+export interface EmergencyHotline {
+  name: string;
+  number: string;
+  role: string;
 }
 
 export interface EmergencyProfile {
   bloodGroup: string;
+  rhFactor: string;
+  bloodCompatibility: string;
+  mriSafe: boolean;
   severeAllergies: string[];
   activeMedications: string[];
   chronicConditions: string[];
   emergencyContacts: EmergencyContact[];
   organDonor: boolean;
+  organDonorRegistryNumber?: string;
   medicalDirectives: string;
+  insuranceProvider?: string;
+  insurancePolicyNumber?: string;
+  preferredHospital?: string;
+  emergencyAddress?: string;
+  emergencyHotlines?: EmergencyHotline[];
 }
 
 export interface DoctorBriefData {

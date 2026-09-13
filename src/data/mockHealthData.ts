@@ -44,26 +44,74 @@ export const freshBaselineStatus: BaselineStatus = {
 };
 
 export const defaultEmergencyProfile: EmergencyProfile = {
-  bloodGroup: 'B+ (Rh Positive)',
-  severeAllergies: ['Penicillin (Severe Anaphylaxis Risk)', 'Shellfish'],
-  activeMedications: ['Levothyroxine 50 mcg (Oral / Daily)', 'Omega-3 1000 mg'],
-  chronicConditions: ['Mild Allergic Rhinitis', 'Episodic Tension Headache'],
+  bloodGroup: 'B+',
+  rhFactor: 'Rh Positive',
+  bloodCompatibility: 'Compatible with B+, B-, O+, O-',
+  mriSafe: true,
+  severeAllergies: [
+    'Penicillin & Beta-Lactams (Severe Anaphylaxis Risk)',
+    'NSAIDs / High-Dose Aspirin (Mild Bronchospasm)',
+    'Shellfish',
+  ],
+  activeMedications: [
+    'Levothyroxine 50 mcg (Daily fasting)',
+    'Omega-3 Fatty Acids 1000 mg (Daily with food)',
+    'Vitamin D3 60,000 IU (Weekly oral)',
+    'Standby: EpiPen 0.3mg (In work bag & vehicle)',
+  ],
+  chronicConditions: [
+    'Cervicogenic Tension Headaches',
+    'Mild Allergic Rhinitis (Seasonal)',
+  ],
   emergencyContacts: [
     {
       name: 'Priya Sharma',
-      relationship: 'Spouse',
+      relationship: 'Spouse (Primary Proxy)',
       phone: '+91 98201 54321',
+      altPhone: '+91 22 2640 9876',
+      location: 'Bandra West, Mumbai',
+      notes: 'Speaks English, Hindi, Marathi. Primary legal healthcare proxy.',
       isPrimary: true,
     },
     {
       name: 'Dr. Rajesh Iyer',
       relationship: 'Primary Physician',
       phone: '+91 98190 12345',
+      altPhone: '+91 22 2675 1000 (Ext 402)',
+      location: 'Lilavati Hospital & Research Centre, Mumbai',
+      notes: 'Reg #MMC/2008/04/1234 • Cardiometabolic Medicine',
+      isPrimary: false,
+    },
+    {
+      name: 'Rohan Sharma',
+      relationship: 'Brother',
+      phone: '+91 98332 67890',
+      altPhone: '+91 98210 54321',
+      location: 'Andheri East, Mumbai',
+      notes: 'Immediate family member available locally.',
+      isPrimary: false,
+    },
+    {
+      name: 'Sunita Sharma',
+      relationship: 'Mother',
+      phone: '+91 98200 11223',
+      location: 'Pune / Mumbai',
+      notes: 'Family contact.',
       isPrimary: false,
     },
   ],
   organDonor: true,
-  medicalDirectives: 'Strictly avoid all Beta-lactam / Penicillin antibiotics. No known NSAID allergy.',
+  organDonorRegistryNumber: 'NOTTO-IND-88219',
+  medicalDirectives: 'Full Code. Advance directive on file. Consent for emergency resuscitation and transfusions. Strictly avoid Penicillin derivatives.',
+  insuranceProvider: 'Star Health Comprehensive Insurance',
+  insurancePolicyNumber: 'SH-8492041-A (TPA: 1800 425 2255)',
+  preferredHospital: 'Lilavati Hospital & Research Centre, Bandra West, Mumbai',
+  emergencyAddress: 'Flat 402, Sea View Apts, Bandra West, Mumbai, MH 400050',
+  emergencyHotlines: [
+    { name: 'National Ambulance', number: '108', role: 'Govt. Emergency EMS' },
+    { name: 'National Emergency', number: '112', role: 'Police & Trauma Dispatch' },
+    { name: 'Lilavati Emergency Room', number: '+91 22 2675 1000', role: '24x7 Trauma & ICU Direct' },
+  ],
 };
 
 export const initialVitals: VitalMetric[] = [

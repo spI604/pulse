@@ -62,29 +62,75 @@ export const ProfileSettingsView: React.FC = () => {
         </span>
       </div>
 
-      {/* Emergency Profile Quick Banner */}
-      <div className="bg-[#FFF8F8] border border-[#D97A7A]/25 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-[#D97A7A] text-white flex items-center justify-center shrink-0 shadow-xs">
-            <ShieldAlert className="w-5 h-5" />
+      {/* Apple Medical ID & Emergency Section */}
+      <div className="bg-white border border-[#FF3B30]/20 rounded-2xl p-5 shadow-[0_2px_12px_rgba(255,59,48,0.06)] space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#FF3B30]/10">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-[#FF3B30] text-white flex items-center justify-center shrink-0 shadow-sm">
+              <ShieldAlert className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <h3 className="text-sm font-bold text-[#1D1D1F]">
+                  Apple Medical ID • Emergency &amp; Accident Profile
+                </h3>
+                <span className="bg-[#FF3B30]/10 text-[#FF3B30] text-[10px] font-bold px-2 py-0.5 rounded-full">
+                  First Responder Ready
+                </span>
+              </div>
+              <span className="text-xs text-[#86868B]">
+                Immediate triage telemetry, universal blood compatibility, and family contacts
+              </span>
+            </div>
           </div>
-          <div>
-            <h3 className="text-xs font-bold text-[#162020]">
-              Emergency Medical Card
-            </h3>
-            <span className="text-[11px] text-[#708080]">
-              Blood Group B+, Penicillin Allergy, and direct contacts for first responders
-            </span>
+
+          <button
+            onClick={() => setIsEmergencyModalOpen(true)}
+            className="inline-flex items-center justify-center gap-1.5 bg-[#FF3B30] hover:bg-[#E03126] text-white text-xs font-semibold px-4 py-2 rounded-xl transition-all shadow-sm active:scale-[0.98] whitespace-nowrap"
+          >
+            <span>Open Full Medical ID</span>
+          </button>
+        </div>
+
+        {/* Quick Accident Summary Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+          <div className="bg-[#F5F5F7] rounded-xl p-3">
+            <span className="text-[10px] uppercase font-semibold text-[#86868B] block mb-0.5">Blood &amp; Rh</span>
+            <span className="font-bold text-[#FF3B30] text-sm">B+ Rh Positive</span>
+            <span className="text-[10px] text-[#86868B] block mt-0.5">Takes B+, B-, O+, O-</span>
+          </div>
+
+          <div className="bg-[#FFF2F2] border border-[#FF3B30]/15 rounded-xl p-3">
+            <span className="text-[10px] uppercase font-semibold text-[#FF3B30] block mb-0.5">Critical Allergy</span>
+            <span className="font-bold text-[#FF3B30] text-sm">Penicillin</span>
+            <span className="text-[10px] text-[#FF3B30]/80 block mt-0.5">Anaphylaxis Risk</span>
+          </div>
+
+          <div className="bg-[#F5F5F7] rounded-xl p-3">
+            <span className="text-[10px] uppercase font-semibold text-[#86868B] block mb-0.5">Preferred Trauma ER</span>
+            <span className="font-bold text-[#1D1D1F] text-xs">Lilavati Hospital</span>
+            <span className="text-[10px] text-[#86868B] block mt-0.5">Bandra West • Level-1</span>
+          </div>
+
+          <div className="bg-[#F5F5F7] rounded-xl p-3">
+            <span className="text-[10px] uppercase font-semibold text-[#86868B] block mb-0.5">Insurance / Cashless</span>
+            <span className="font-bold text-[#1D1D1F] text-xs">Star Health Premier</span>
+            <span className="text-[10px] text-[#86868B] block mt-0.5 truncate">#SH-8492041-A</span>
           </div>
         </div>
 
-        <button
-          onClick={() => setIsEmergencyModalOpen(true)}
-          className="touch-target inline-flex items-center gap-1.5 bg-[#D97A7A] hover:bg-[#C55F5F] text-white text-xs font-bold px-4 py-2 rounded-xl transition-all shadow-xs whitespace-nowrap"
-        >
-          <span>Open Emergency Card</span>
-        </button>
+        {/* Emergency Contacts Strip */}
+        <div className="pt-2 flex flex-wrap items-center justify-between gap-3 text-xs text-[#86868B]">
+          <div className="flex items-center gap-3">
+            <span className="font-semibold text-[#1D1D1F]">Primary ICE:</span>
+            <span className="text-[#48484A]">Priya Sharma (Spouse): +91 98201 44321</span>
+            <span className="text-[#86868B] hidden sm:inline">•</span>
+            <span className="text-[#48484A] hidden sm:inline">Dr. Rajesh Iyer: +91 98190 22110</span>
+          </div>
+          <span className="text-[11px] text-[#1D7A74] font-medium">4 Verified Contacts Configured</span>
+        </div>
       </div>
+
 
       {/* Profile Information Form */}
       <div className="bg-white border border-[#EAEFEF] rounded-2xl p-5 shadow-[0_1px_3px_rgba(0,0,0,0.02)] space-y-4">

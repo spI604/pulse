@@ -14,8 +14,8 @@ export const HealthScoreRing: React.FC<HealthScoreRingProps> = ({
   statusText = 'Optimal Baseline',
   isCalibrated = true,
 }) => {
-  const size = 100;
-  const strokeWidth = 7;
+  const size = 110;
+  const strokeWidth = 8;
   const center = size / 2;
   const radius = center - strokeWidth;
   const circumference = 2 * Math.PI * radius;
@@ -24,16 +24,16 @@ export const HealthScoreRing: React.FC<HealthScoreRingProps> = ({
     : circumference - 0.2 * circumference;
 
   return (
-    <div className="bg-white border border-[#EAEFEF] rounded-2xl p-5 shadow-[0_1px_3px_rgba(0,0,0,0.02)] flex flex-col sm:flex-row items-center justify-between gap-6">
-      <div className="flex items-center gap-4">
-        {/* Sleek Minimal Ring */}
+    <div className="apple-card p-5 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div className="flex items-center gap-5">
+        {/* Apple Fitness-style Ring */}
         <div className="relative flex items-center justify-center shrink-0" style={{ width: size, height: size }}>
           <svg width={size} height={size} className="transform -rotate-90">
             <circle
               cx={center}
               cy={center}
               r={radius}
-              stroke="#EEF5F4"
+              stroke="#E5E5EA"
               strokeWidth={strokeWidth}
               fill="transparent"
             />
@@ -41,59 +41,69 @@ export const HealthScoreRing: React.FC<HealthScoreRingProps> = ({
               cx={center}
               cy={center}
               r={radius}
-              stroke="#2F7E79"
+              stroke="#1D7A74"
               strokeWidth={strokeWidth}
               strokeDasharray={circumference}
               initial={{ strokeDashoffset: circumference }}
               animate={{ strokeDashoffset }}
-              transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
               strokeLinecap="round"
               fill="transparent"
             />
           </svg>
 
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-            <span className="text-xl font-bold text-[#162020] tracking-tight">
+            <span className="text-2xl font-bold text-[#1D1D1F] tracking-tight">
               {isCalibrated ? score : '--'}
             </span>
-            <span className="text-[9px] uppercase font-bold text-[#8FA0A0]">
+            <span className="text-[9px] uppercase font-bold text-[#86868B] tracking-wider">
               Score
             </span>
           </div>
         </div>
 
         <div>
-          <span className="text-xs font-bold text-[#2F7E79] block mb-0.5">
+          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#1D7A74] bg-[#1D7A74]/10 px-2.5 py-0.5 rounded-full mb-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#1D7A74]" />
             {statusText}
           </span>
-          <h2 className="text-base font-bold text-[#162020]">
+          <h2 className="text-base font-bold text-[#1D1D1F] tracking-tight">
             {isCalibrated ? 'Physiological rhythm steady' : 'Calibrating personal baseline'}
           </h2>
-          <span className="text-xs text-[#8FA0A0]">
-            {isCalibrated ? 'All vitals tracking in normal corridor' : 'Baseline requires 7 days'}
+          <span className="text-xs text-[#86868B] block mt-0.5">
+            {isCalibrated ? 'All 6 vital channels tracking within calibrated corridor' : 'Baseline requires 7 days continuous telemetry'}
           </span>
         </div>
       </div>
 
-      {/* Clean Unboxed Sub-metrics */}
-      <div className="flex items-center gap-6 sm:border-l sm:border-[#F0F4F3] sm:pl-6 text-center">
+      {/* Apple Sub-metrics with Color Accent Dots */}
+      <div className="flex items-center gap-6 sm:border-l sm:border-[#E5E5EA] sm:pl-6 text-center w-full sm:w-auto justify-around sm:justify-end">
         <div>
-          <span className="text-[11px] text-[#8FA0A0] block">Autonomic</span>
-          <span className="text-sm font-bold text-[#162020]">
+          <div className="flex items-center justify-center gap-1.5 mb-0.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#34C759]" />
+            <span className="text-[11px] font-medium text-[#86868B]">Autonomic</span>
+          </div>
+          <span className="text-base font-bold text-[#1D1D1F]">
             {isCalibrated ? '94%' : '--'}
           </span>
         </div>
 
         <div>
-          <span className="text-[11px] text-[#8FA0A0] block">Sleep</span>
-          <span className="text-sm font-bold text-[#162020]">
+          <div className="flex items-center justify-center gap-1.5 mb-0.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#5856D6]" />
+            <span className="text-[11px] font-medium text-[#86868B]">Sleep</span>
+          </div>
+          <span className="text-base font-bold text-[#1D1D1F]">
             {isCalibrated ? '91%' : '--'}
           </span>
         </div>
 
         <div>
-          <span className="text-[11px] text-[#8FA0A0] block">Hydration</span>
-          <span className="text-sm font-bold text-[#162020]">
+          <div className="flex items-center justify-center gap-1.5 mb-0.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#0071E3]" />
+            <span className="text-[11px] font-medium text-[#86868B]">Hydration</span>
+          </div>
+          <span className="text-base font-bold text-[#1D1D1F]">
             {isCalibrated ? '84%' : '--'}
           </span>
         </div>
@@ -101,3 +111,4 @@ export const HealthScoreRing: React.FC<HealthScoreRingProps> = ({
     </div>
   );
 };
+

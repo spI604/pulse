@@ -47,21 +47,22 @@ export const DashboardView: React.FC = () => {
   }
 
   return (
-    <div className="space-y-5 max-w-4xl mx-auto pb-12">
+    <div className="space-y-6 max-w-4xl mx-auto pb-12">
       {/* 1. Health Summary Greeting */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-bold text-[#162020] tracking-tight">
+          <h1 className="text-2xl font-bold text-[#1D1D1F] tracking-tight">
             {getGreeting()}, {userProfile.name}
           </h1>
-          <span className="text-xs text-[#708080]">
-            Physiological rhythm is steady today
+          <span className="text-xs text-[#86868B] block mt-0.5">
+            Your physiological rhythms are well within your calibrated personal corridor.
           </span>
         </div>
 
-        <span className="text-xs font-semibold text-[#2F7E79] bg-[#EEF5F4] px-2.5 py-0.5 rounded-full">
-          94d Calibrated
-        </span>
+        <div className="flex items-center gap-1.5 bg-[#1D7A74]/10 text-[#1D7A74] px-3 py-1 rounded-full text-xs font-semibold">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#1D7A74] animate-pulse" />
+          <span>94d Calibrated</span>
+        </div>
       </div>
 
       {/* Health Score Ring Hero */}
@@ -72,19 +73,21 @@ export const DashboardView: React.FC = () => {
       />
 
       {/* 2. Today's State Cards */}
-      <div className="space-y-2">
-        <div className="flex items-center justify-between text-xs">
-          <span className="font-bold text-[#162020]">Today&apos;s Vitals</span>
+      <div className="space-y-2.5">
+        <div className="flex items-center justify-between">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#86868B]">
+            Today&apos;s Telemetry
+          </span>
           <button
             onClick={() => setActiveTab('twin')}
-            className="text-[#2F7E79] font-medium hover:underline flex items-center gap-0.5"
+            className="text-xs font-semibold text-[#1D7A74] hover:text-[#155A55] flex items-center gap-1 group transition-colors"
           >
             <span>Digital Twin</span>
-            <ArrowRight className="w-3 h-3" />
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
           </button>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
           {vitals.map((metric, idx) => (
             <MetricCard
               key={metric.id}
@@ -97,62 +100,62 @@ export const DashboardView: React.FC = () => {
       </div>
 
       {/* 3. AI Insights */}
-      <div className="space-y-2">
-        <span className="text-xs font-bold text-[#162020] block">
-          AI Insights
+      <div className="space-y-2.5">
+        <span className="text-xs font-bold uppercase tracking-wider text-[#86868B] block">
+          Intelligence &amp; Biomarkers
         </span>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {aiInsights.slice(0, 2).map((insight, idx) => (
             <InsightCard key={insight.id} insight={insight} index={idx} />
           ))}
         </div>
       </div>
 
-      {/* 4. Sleek Quick Actions Strip */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
+      {/* 4. Apple Control Center-style Quick Actions Strip */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
         <button
           onClick={() => setActiveTab('check-in')}
-          className="touch-target group bg-white border border-[#EAEFEF] hover:border-[#2F7E79]/30 rounded-2xl p-3 text-left shadow-[0_1px_3px_rgba(0,0,0,0.02)] transition-all flex items-center gap-3"
+          className="apple-card p-3.5 text-left group hover:border-[#34C759]/40 hover:shadow-md transition-all duration-300 flex items-center gap-3.5"
         >
-          <div className="w-8 h-8 rounded-lg bg-[#EEF5F4] group-hover:bg-[#2F7E79] text-[#2F7E79] group-hover:text-white flex items-center justify-center transition-colors">
-            <CheckCircle className="w-4 h-4" />
+          <div className="w-9 h-9 rounded-xl bg-[#34C759]/10 text-[#34C759] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+            <CheckCircle className="w-5 h-5" />
           </div>
           <div>
-            <span className="text-xs font-bold text-[#162020] block group-hover:text-[#2F7E79]">
+            <span className="text-xs font-bold text-[#1D1D1F] block group-hover:text-[#34C759] transition-colors">
               Daily Check-In
             </span>
-            <span className="text-[10px] text-[#8FA0A0]">30-second log</span>
+            <span className="text-[11px] text-[#86868B]">30-second log</span>
           </div>
         </button>
 
         <button
           onClick={() => setActiveTab('journal')}
-          className="touch-target group bg-white border border-[#EAEFEF] hover:border-[#2F7E79]/30 rounded-2xl p-3 text-left shadow-[0_1px_3px_rgba(0,0,0,0.02)] transition-all flex items-center gap-3"
+          className="apple-card p-3.5 text-left group hover:border-[#5856D6]/40 hover:shadow-md transition-all duration-300 flex items-center gap-3.5"
         >
-          <div className="w-8 h-8 rounded-lg bg-[#EEF5F4] group-hover:bg-[#2F7E79] text-[#2F7E79] group-hover:text-white flex items-center justify-center transition-colors">
-            <PenLine className="w-4 h-4" />
+          <div className="w-9 h-9 rounded-xl bg-[#5856D6]/10 text-[#5856D6] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+            <PenLine className="w-5 h-5" />
           </div>
           <div>
-            <span className="text-xs font-bold text-[#162020] block group-hover:text-[#2F7E79]">
+            <span className="text-xs font-bold text-[#1D1D1F] block group-hover:text-[#5856D6] transition-colors">
               Health Journal
             </span>
-            <span className="text-[10px] text-[#8FA0A0]">Text signal extraction</span>
+            <span className="text-[11px] text-[#86868B]">Symptom notes</span>
           </div>
         </button>
 
         <button
           onClick={() => setActiveTab('brief')}
-          className="touch-target group bg-white border border-[#EAEFEF] hover:border-[#2F7E79]/30 rounded-2xl p-3 text-left shadow-[0_1px_3px_rgba(0,0,0,0.02)] transition-all flex items-center gap-3"
+          className="apple-card p-3.5 text-left group hover:border-[#1D7A74]/40 hover:shadow-md transition-all duration-300 flex items-center gap-3.5"
         >
-          <div className="w-8 h-8 rounded-lg bg-[#EEF5F4] group-hover:bg-[#2F7E79] text-[#2F7E79] group-hover:text-white flex items-center justify-center transition-colors">
-            <FileText className="w-4 h-4" />
+          <div className="w-9 h-9 rounded-xl bg-[#1D7A74]/10 text-[#1D7A74] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+            <FileText className="w-5 h-5" />
           </div>
           <div>
-            <span className="text-xs font-bold text-[#162020] block group-hover:text-[#2F7E79]">
+            <span className="text-xs font-bold text-[#1D1D1F] block group-hover:text-[#1D7A74] transition-colors">
               Doctor Brief
             </span>
-            <span className="text-[10px] text-[#8FA0A0]">Consultation report</span>
+            <span className="text-[11px] text-[#86868B]">Consultation summary</span>
           </div>
         </button>
       </div>
