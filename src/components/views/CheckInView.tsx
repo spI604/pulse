@@ -14,17 +14,16 @@ import {
   X,
   Sparkles,
   ArrowRight,
-  ShieldCheck,
+  ArrowLeft,
 } from 'lucide-react';
 
 export const CheckInView: React.FC = () => {
   const { addCheckIn, setActiveTab } = useHealth();
 
-  // Step state (0 to 3) or completion (4)
   const [currentStep, setCurrentStep] = useState<number>(0);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
 
-  // Form selections
+  // Form state
   const [overallFeeling, setOverallFeeling] = useState<'great' | 'okay' | 'off'>('great');
   const [mood, setMood] = useState<number>(4);
   const [energy, setEnergy] = useState<number>(4);
@@ -64,13 +63,12 @@ export const CheckInView: React.FC = () => {
 
     setIsCompleted(true);
 
-    // Subtle, gentle micro-delight confetti
     confetti({
-      particleCount: 35,
-      spread: 45,
-      origin: { y: 0.7 },
-      colors: ['#2F7E79', '#8FB5AF', '#EEF3F2'],
-      ticks: 150,
+      particleCount: 30,
+      spread: 40,
+      origin: { y: 0.65 },
+      colors: ['#2F7E79', '#8FB5AF', '#EEF5F4'],
+      ticks: 120,
       disableForReducedMotion: true,
     });
   };
@@ -80,52 +78,49 @@ export const CheckInView: React.FC = () => {
   if (isCompleted) {
     return (
       <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
+        initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ type: 'spring', stiffness: 120, damping: 18 }}
-        className="max-w-xl mx-auto py-12 px-4 text-center"
+        transition={{ duration: 0.2 }}
+        className="max-w-md mx-auto py-12 px-4 text-center"
       >
-        <div className="bg-white border border-[#E2EAE8] rounded-3xl p-8 md:p-12 shadow-sm">
-          <div className="w-16 h-16 rounded-3xl bg-[#EEF3F2] text-[#2F7E79] flex items-center justify-center mx-auto mb-5 border border-[#8FB5AF]">
-            <CheckCircle2 className="w-8 h-8" />
+        <div className="bg-white border border-[#EAEFEF] rounded-3xl p-8 shadow-[0_2px_12px_rgba(0,0,0,0.03)] space-y-5">
+          <div className="w-14 h-14 rounded-2xl bg-[#EEF5F4] text-[#2F7E79] flex items-center justify-center mx-auto">
+            <CheckCircle2 className="w-7 h-7" />
           </div>
 
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#2F7E79] block mb-1">
-            Check-In Recorded
-          </span>
+          <div>
+            <h2 className="text-xl font-bold text-[#162020]">
+              Check-In Recorded
+            </h2>
+            <p className="text-xs text-[#708080] mt-1">
+              Baseline updated for today
+            </p>
+          </div>
 
-          <h2 className="text-2xl font-semibold text-[#1F2A2A] mb-3">
-            Your Personal Baseline is Updated
-          </h2>
-
-          <p className="text-sm text-[#6C7A7A] max-w-md mx-auto leading-relaxed mb-6">
-            Today&apos;s observation has been quietly woven into your 94-day physiological history. No alarms detected.
-          </p>
-
-          <div className="bg-[#F7F8F7] border border-[#E2EAE8] rounded-2xl p-4 text-left mb-6 max-w-md mx-auto space-y-2 text-xs">
-            <div className="flex justify-between text-[#6C7A7A]">
-              <span>Overall State:</span>
-              <span className="font-semibold text-[#1F2A2A] capitalize">{overallFeeling}</span>
+          <div className="bg-[#F8FAF9] rounded-2xl p-4 text-left space-y-2 text-xs">
+            <div className="flex justify-between text-[#708080]">
+              <span>Overall State</span>
+              <span className="font-semibold text-[#162020] capitalize">{overallFeeling}</span>
             </div>
-            <div className="flex justify-between text-[#6C7A7A]">
-              <span>Stress Assessment:</span>
-              <span className="font-semibold text-[#1F2A2A] capitalize">{stressLevel}</span>
+            <div className="flex justify-between text-[#708080]">
+              <span>Stress</span>
+              <span className="font-semibold text-[#162020] capitalize">{stressLevel}</span>
             </div>
-            <div className="flex justify-between text-[#6C7A7A]">
-              <span>Reported Symptoms:</span>
-              <span className="font-semibold text-[#1F2A2A]">
-                {selectedSymptoms.length > 0 ? selectedSymptoms.join(', ') : 'None (Asymptomatic)'}
+            <div className="flex justify-between text-[#708080]">
+              <span>Symptoms</span>
+              <span className="font-semibold text-[#162020]">
+                {selectedSymptoms.length > 0 ? selectedSymptoms.join(', ') : 'None'}
               </span>
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-3">
+          <div className="flex items-center justify-center gap-3 pt-2">
             <button
               onClick={() => setActiveTab('dashboard')}
-              className="touch-target inline-flex items-center gap-2 bg-[#2F7E79] hover:bg-[#266864] text-white text-sm font-medium px-6 py-3 rounded-xl transition-all shadow-sm"
+              className="touch-target inline-flex items-center gap-2 bg-[#2F7E79] hover:bg-[#266864] text-white text-xs font-semibold px-6 py-2.5 rounded-xl transition-all shadow-xs"
             >
-              <span>Return to Dashboard</span>
-              <ArrowRight className="w-4 h-4" />
+              <span>Dashboard</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </button>
 
             <button
@@ -133,7 +128,7 @@ export const CheckInView: React.FC = () => {
                 setIsCompleted(false);
                 setCurrentStep(0);
               }}
-              className="touch-target text-sm font-medium text-[#6C7A7A] hover:text-[#1F2A2A] px-4 py-3 rounded-xl border border-[#E2EAE8] hover:bg-[#F7F8F7] transition-all"
+              className="touch-target text-xs font-medium text-[#708080] hover:text-[#162020] px-4 py-2.5 rounded-xl border border-[#EAEFEF] hover:bg-[#F8FAF9] transition-all"
             >
               Log Another
             </button>
@@ -144,60 +139,55 @@ export const CheckInView: React.FC = () => {
   }
 
   return (
-    <div className="max-w-2xl mx-auto py-6 px-4">
+    <div className="max-w-xl mx-auto py-6 px-4">
       {/* Header */}
       <div className="mb-6">
         <div className="flex items-center justify-between mb-2">
           <div>
-            <h1 className="text-2xl font-semibold text-[#1F2A2A]">
-              Quick Health Check-In
+            <h1 className="text-xl font-bold text-[#162020]">
+              Daily Check-In
             </h1>
-            <p className="text-xs text-[#6C7A7A] mt-0.5">
-              Takes under 30 seconds. Informs your personal baseline.
+            <p className="text-xs text-[#708080]">
+              30-second physiological log
             </p>
           </div>
 
-          <span className="text-xs font-medium text-[#5F8F8B] bg-[#EEF3F2] px-3 py-1 rounded-full border border-[#E2EAE8]">
-            Step {currentStep + 1} of {totalSteps}
+          <span className="text-xs font-semibold text-[#2F7E79] bg-[#EEF5F4] px-2.5 py-0.5 rounded-full">
+            {currentStep + 1} of {totalSteps}
           </span>
         </div>
 
         {/* Progress Bar */}
-        <div className="h-1.5 w-full bg-[#EEF3F2] rounded-full overflow-hidden">
+        <div className="h-1 w-full bg-[#EEF5F4] rounded-full overflow-hidden">
           <motion.div
             className="h-full bg-[#2F7E79] rounded-full"
             animate={{ width: `${((currentStep + 1) / totalSteps) * 100}%` }}
-            transition={{ duration: 0.25 }}
+            transition={{ duration: 0.2 }}
           />
         </div>
       </div>
 
-      <div className="bg-white border border-[#E2EAE8] rounded-3xl p-6 sm:p-8 shadow-xs">
+      <div className="bg-white border border-[#EAEFEF] rounded-3xl p-6 sm:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
         <AnimatePresence mode="wait">
-          {/* STEP 1: HOW ARE YOU FEELING OVERALL? */}
+          {/* STEP 1: FEELING */}
           {currentStep === 0 && (
             <motion.div
-              key="q-feeling"
-              initial={{ opacity: 0, x: 12 }}
+              key="step-feeling"
+              initial={{ opacity: 0, x: 10 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -12 }}
-              transition={{ duration: 0.2 }}
+              exit={{ opacity: 0, x: -10 }}
+              transition={{ duration: 0.18 }}
               className="space-y-6"
             >
-              <div>
-                <h2 className="text-lg font-medium text-[#1F2A2A]">
-                  How are you feeling overall today?
-                </h2>
-                <p className="text-xs text-[#6C7A7A] mt-1">
-                  Choose the state that most closely describes your current physiological sense.
-                </p>
-              </div>
+              <h2 className="text-base font-bold text-[#162020]">
+                How are you feeling overall today?
+              </h2>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {[
                   { id: 'great', label: 'Great', desc: 'Energized & balanced', icon: Smile },
-                  { id: 'okay', label: 'Okay', desc: 'Normal baseline rhythm', icon: Meh },
-                  { id: 'off', label: 'Off', desc: 'Subtle fatigue or strain', icon: Frown },
+                  { id: 'okay', label: 'Okay', desc: 'Normal baseline', icon: Meh },
+                  { id: 'off', label: 'Off', desc: 'Fatigued or strained', icon: Frown },
                 ].map((item) => {
                   const Icon = item.icon;
                   const isSelected = overallFeeling === item.id;
@@ -206,19 +196,19 @@ export const CheckInView: React.FC = () => {
                       key={item.id}
                       type="button"
                       onClick={() => setOverallFeeling(item.id as any)}
-                      className={`touch-target p-5 rounded-2xl border text-left flex flex-col justify-between transition-all ${
+                      className={`touch-target p-4 rounded-2xl border text-left flex flex-col justify-between transition-all ${
                         isSelected
-                          ? 'bg-[#EEF3F2] border-[#2F7E79] shadow-xs ring-1 ring-[#2F7E79]'
-                          : 'bg-[#F7F8F7] border-[#E2EAE8] hover:bg-white hover:border-[#8FB5AF]'
+                          ? 'bg-[#EEF5F4] border-[#2F7E79] shadow-xs'
+                          : 'bg-white border-[#EAEFEF] hover:border-[#8FB5AF]/50'
                       }`}
                     >
                       <div className="flex items-center justify-between mb-3">
                         <div
-                          className={`w-9 h-9 rounded-xl flex items-center justify-center ${
-                            isSelected ? 'bg-[#2F7E79] text-white' : 'bg-white text-[#5F8F8B] border border-[#E2EAE8]'
+                          className={`w-8 h-8 rounded-xl flex items-center justify-center ${
+                            isSelected ? 'bg-[#2F7E79] text-white' : 'bg-[#F0F4F3] text-[#5F8F8B]'
                           }`}
                         >
-                          <Icon className="w-5 h-5" />
+                          <Icon className="w-4 h-4" />
                         </div>
                         {isSelected && (
                           <span className="w-2 h-2 rounded-full bg-[#2F7E79]" />
@@ -226,10 +216,10 @@ export const CheckInView: React.FC = () => {
                       </div>
 
                       <div>
-                        <span className="text-base font-semibold text-[#1F2A2A] block">
+                        <span className="text-sm font-bold text-[#162020] block">
                           {item.label}
                         </span>
-                        <span className="text-xs text-[#6C7A7A] block mt-0.5">
+                        <span className="text-[11px] text-[#708080] block mt-0.5">
                           {item.desc}
                         </span>
                       </div>
@@ -238,42 +228,37 @@ export const CheckInView: React.FC = () => {
                 })}
               </div>
 
-              <div className="pt-4 flex justify-end">
+              <div className="pt-2 flex justify-end">
                 <button
                   onClick={() => setCurrentStep(1)}
-                  className="touch-target inline-flex items-center gap-2 bg-[#2F7E79] hover:bg-[#266864] text-white text-sm font-medium px-6 py-2.5 rounded-xl transition-all"
+                  className="touch-target inline-flex items-center gap-1.5 bg-[#2F7E79] hover:bg-[#266864] text-white text-xs font-semibold px-5 py-2.5 rounded-xl transition-all shadow-xs"
                 >
-                  <span>Next: Energy & Mood</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <span>Next</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
             </motion.div>
           )}
 
-          {/* STEP 2: MOOD, ENERGY & STRESS */}
+          {/* STEP 2: MOOD & ENERGY */}
           {currentStep === 1 && (
             <motion.div
-              key="q-mood-energy"
-              initial={{ opacity: 0, x: 12 }}
+              key="step-mood-energy"
+              initial={{ opacity: 0, x: 10 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -12 }}
-              transition={{ duration: 0.2 }}
-              className="space-y-6"
+              exit={{ opacity: 0, x: -10 }}
+              transition={{ duration: 0.18 }}
+              className="space-y-5"
             >
-              <div>
-                <h2 className="text-lg font-medium text-[#1F2A2A]">
-                  Mood & Energy Levels
-                </h2>
-                <p className="text-xs text-[#6C7A7A] mt-1">
-                  Rate your subjective emotional tone and physical vitality.
-                </p>
-              </div>
+              <h2 className="text-base font-bold text-[#162020]">
+                Mood &amp; Energy
+              </h2>
 
-              {/* Mood Slider */}
-              <div className="space-y-2">
-                <div className="flex items-center justify-between text-xs font-medium text-[#1F2A2A]">
-                  <span>Mood Tone</span>
-                  <span className="text-[#2F7E79]">{mood} / 5</span>
+              {/* Mood */}
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between text-xs text-[#162020]">
+                  <span className="font-medium">Mood</span>
+                  <span className="text-[#2F7E79] font-bold">{mood} / 5</span>
                 </div>
                 <div className="flex items-center gap-2">
                   {[1, 2, 3, 4, 5].map((val) => (
@@ -281,23 +266,23 @@ export const CheckInView: React.FC = () => {
                       key={val}
                       type="button"
                       onClick={() => setMood(val)}
-                      className={`flex-1 py-2.5 text-xs font-semibold rounded-xl border transition-all ${
+                      className={`flex-1 py-2 text-xs font-semibold rounded-xl border transition-all ${
                         mood === val
                           ? 'bg-[#2F7E79] text-white border-[#2F7E79]'
-                          : 'bg-[#F7F8F7] border-[#E2EAE8] text-[#6C7A7A] hover:bg-white'
+                          : 'bg-[#F8FAF9] border-[#EAEFEF] text-[#708080] hover:bg-white'
                       }`}
                     >
-                      {val === 1 ? 'Low' : val === 3 ? 'Neutral' : val === 5 ? 'Serene' : val}
+                      {val}
                     </button>
                   ))}
                 </div>
               </div>
 
-              {/* Energy Slider */}
-              <div className="space-y-2">
-                <div className="flex items-center justify-between text-xs font-medium text-[#1F2A2A]">
-                  <span>Energy & Vigor</span>
-                  <span className="text-[#2F7E79]">{energy} / 5</span>
+              {/* Energy */}
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between text-xs text-[#162020]">
+                  <span className="font-medium">Energy</span>
+                  <span className="text-[#2F7E79] font-bold">{energy} / 5</span>
                 </div>
                 <div className="flex items-center gap-2">
                   {[1, 2, 3, 4, 5].map((val) => (
@@ -305,179 +290,160 @@ export const CheckInView: React.FC = () => {
                       key={val}
                       type="button"
                       onClick={() => setEnergy(val)}
-                      className={`flex-1 py-2.5 text-xs font-semibold rounded-xl border transition-all ${
+                      className={`flex-1 py-2 text-xs font-semibold rounded-xl border transition-all ${
                         energy === val
                           ? 'bg-[#2F7E79] text-white border-[#2F7E79]'
-                          : 'bg-[#F7F8F7] border-[#E2EAE8] text-[#6C7A7A] hover:bg-white'
+                          : 'bg-[#F8FAF9] border-[#EAEFEF] text-[#708080] hover:bg-white'
                       }`}
                     >
-                      {val === 1 ? 'Drained' : val === 3 ? 'Steady' : val === 5 ? 'Vibrant' : val}
+                      {val}
                     </button>
                   ))}
                 </div>
               </div>
 
-              {/* Stress Level */}
-              <div className="space-y-2">
-                <span className="text-xs font-medium text-[#1F2A2A] block">
-                  Perceived Stress Level
+              {/* Stress */}
+              <div className="space-y-1.5">
+                <span className="text-xs font-medium text-[#162020] block">
+                  Perceived Stress
                 </span>
                 <div className="grid grid-cols-3 gap-2">
                   {[
-                    { id: 'low', label: 'Low', desc: 'Calm autonomic state' },
-                    { id: 'mild', label: 'Mild', desc: 'Manageable tasks' },
-                    { id: 'elevated', label: 'Elevated', desc: 'Noticeable tension' },
+                    { id: 'low', label: 'Low' },
+                    { id: 'mild', label: 'Mild' },
+                    { id: 'elevated', label: 'Elevated' },
                   ].map((lvl) => (
                     <button
                       key={lvl.id}
                       type="button"
                       onClick={() => setStressLevel(lvl.id as any)}
-                      className={`p-3 rounded-xl border text-center transition-all ${
+                      className={`py-2 px-3 rounded-xl border text-center transition-all ${
                         stressLevel === lvl.id
-                          ? 'bg-[#EEF3F2] border-[#2F7E79] text-[#2F7E79] font-medium'
-                          : 'bg-[#F7F8F7] border-[#E2EAE8] text-[#6C7A7A] hover:bg-white'
+                          ? 'bg-[#EEF5F4] border-[#2F7E79] text-[#2F7E79] font-bold'
+                          : 'bg-[#F8FAF9] border-[#EAEFEF] text-[#708080] hover:bg-white'
                       }`}
                     >
-                      <span className="text-xs font-semibold block">{lvl.label}</span>
-                      <span className="text-[10px] text-[#6C7A7A] block mt-0.5">{lvl.desc}</span>
+                      <span className="text-xs block">{lvl.label}</span>
                     </button>
                   ))}
                 </div>
               </div>
 
-              <div className="pt-4 flex items-center justify-between">
+              <div className="pt-3 flex items-center justify-between">
                 <button
                   onClick={() => setCurrentStep(0)}
-                  className="text-xs font-medium text-[#6C7A7A] hover:text-[#1F2A2A]"
+                  className="inline-flex items-center gap-1 text-xs font-medium text-[#708080] hover:text-[#162020]"
                 >
-                  Back
+                  <ArrowLeft className="w-3.5 h-3.5" />
+                  <span>Back</span>
                 </button>
                 <button
                   onClick={() => setCurrentStep(2)}
-                  className="touch-target inline-flex items-center gap-2 bg-[#2F7E79] hover:bg-[#266864] text-white text-sm font-medium px-6 py-2.5 rounded-xl transition-all"
+                  className="touch-target inline-flex items-center gap-1.5 bg-[#2F7E79] hover:bg-[#266864] text-white text-xs font-semibold px-5 py-2.5 rounded-xl transition-all shadow-xs"
                 >
-                  <span>Next: Sleep & Hydration</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <span>Next</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
             </motion.div>
           )}
 
-          {/* STEP 3: SLEEP QUALITY & HYDRATION */}
+          {/* STEP 3: SLEEP & HYDRATION */}
           {currentStep === 2 && (
             <motion.div
-              key="q-sleep-hydration"
-              initial={{ opacity: 0, x: 12 }}
+              key="step-sleep-hydration"
+              initial={{ opacity: 0, x: 10 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -12 }}
-              transition={{ duration: 0.2 }}
-              className="space-y-6"
+              exit={{ opacity: 0, x: -10 }}
+              transition={{ duration: 0.18 }}
+              className="space-y-5"
             >
-              <div>
-                <h2 className="text-lg font-medium text-[#1F2A2A]">
-                  Sleep Restfulness & Hydration
-                </h2>
-                <p className="text-xs text-[#6C7A7A] mt-1">
-                  Circadian and fluid metrics act as key buffers against acute symptoms.
-                </p>
-              </div>
+              <h2 className="text-base font-bold text-[#162020]">
+                Sleep &amp; Hydration
+              </h2>
 
               {/* Sleep Quality */}
-              <div className="space-y-2">
-                <span className="text-xs font-medium text-[#1F2A2A] block">
-                  Last Night&apos;s Sleep Restfulness
+              <div className="space-y-1.5">
+                <span className="text-xs font-medium text-[#162020] block">
+                  Last Night&apos;s Sleep
                 </span>
                 <div className="grid grid-cols-3 gap-2">
                   {[
-                    { id: 'restful', label: 'Restful', desc: 'Woke refreshed' },
-                    { id: 'average', label: 'Average', desc: 'Adequate recovery' },
-                    { id: 'disrupted', label: 'Disrupted', desc: 'Restless / short' },
+                    { id: 'restful', label: 'Restful' },
+                    { id: 'average', label: 'Average' },
+                    { id: 'disrupted', label: 'Disrupted' },
                   ].map((sq) => (
                     <button
                       key={sq.id}
                       type="button"
                       onClick={() => setSleepQuality(sq.id as any)}
-                      className={`p-3 rounded-xl border text-center transition-all ${
+                      className={`py-2 px-3 rounded-xl border text-center transition-all ${
                         sleepQuality === sq.id
-                          ? 'bg-[#EEF3F2] border-[#2F7E79] text-[#2F7E79] font-medium'
-                          : 'bg-[#F7F8F7] border-[#E2EAE8] text-[#6C7A7A] hover:bg-white'
+                          ? 'bg-[#EEF5F4] border-[#2F7E79] text-[#2F7E79] font-bold'
+                          : 'bg-[#F8FAF9] border-[#EAEFEF] text-[#708080] hover:bg-white'
                       }`}
                     >
-                      <span className="text-xs font-semibold block">{sq.label}</span>
-                      <span className="text-[10px] text-[#6C7A7A] block mt-0.5">{sq.desc}</span>
+                      <span className="text-xs block">{sq.label}</span>
                     </button>
                   ))}
                 </div>
               </div>
 
-              {/* Hydration Tally */}
+              {/* Hydration */}
               <div className="space-y-2">
-                <div className="flex items-center justify-between text-xs font-medium text-[#1F2A2A]">
-                  <span>Today&apos;s Fluid Intake</span>
-                  <span className="text-[#2F7E79] font-semibold">{hydrationLitres.toFixed(1)} Litres</span>
+                <div className="flex items-center justify-between text-xs font-medium text-[#162020]">
+                  <span>Fluid Intake</span>
+                  <span className="text-[#2F7E79] font-bold">{hydrationLitres.toFixed(1)} L</span>
                 </div>
-                <div className="flex items-center gap-3 bg-[#F7F8F7] border border-[#E2EAE8] rounded-2xl p-4">
-                  <div className="w-10 h-10 rounded-xl bg-white border border-[#E2EAE8] flex items-center justify-center text-[#5F8F8B]">
-                    <Droplets className="w-5 h-5" />
-                  </div>
-                  <div className="flex-1">
-                    <input
-                      type="range"
-                      min="0.5"
-                      max="4.0"
-                      step="0.1"
-                      value={hydrationLitres}
-                      onChange={(e) => setHydrationLitres(parseFloat(e.target.value))}
-                      className="w-full accent-[#2F7E79]"
-                    />
-                    <div className="flex justify-between text-[10px] text-[#6C7A7A] mt-1">
-                      <span>0.5 L</span>
-                      <span>Target: 2.5 L</span>
-                      <span>4.0 L</span>
-                    </div>
-                  </div>
+                <div className="flex items-center gap-3 bg-[#F8FAF9] rounded-2xl p-3 border border-[#EAEFEF]">
+                  <Droplets className="w-4 h-4 text-[#2F7E79] shrink-0" />
+                  <input
+                    type="range"
+                    min="0.5"
+                    max="4.0"
+                    step="0.1"
+                    value={hydrationLitres}
+                    onChange={(e) => setHydrationLitres(parseFloat(e.target.value))}
+                    className="w-full accent-[#2F7E79]"
+                  />
                 </div>
               </div>
 
-              <div className="pt-4 flex items-center justify-between">
+              <div className="pt-3 flex items-center justify-between">
                 <button
                   onClick={() => setCurrentStep(1)}
-                  className="text-xs font-medium text-[#6C7A7A] hover:text-[#1F2A2A]"
+                  className="inline-flex items-center gap-1 text-xs font-medium text-[#708080] hover:text-[#162020]"
                 >
-                  Back
+                  <ArrowLeft className="w-3.5 h-3.5" />
+                  <span>Back</span>
                 </button>
                 <button
                   onClick={() => setCurrentStep(3)}
-                  className="touch-target inline-flex items-center gap-2 bg-[#2F7E79] hover:bg-[#266864] text-white text-sm font-medium px-6 py-2.5 rounded-xl transition-all"
+                  className="touch-target inline-flex items-center gap-1.5 bg-[#2F7E79] hover:bg-[#266864] text-white text-xs font-semibold px-5 py-2.5 rounded-xl transition-all shadow-xs"
                 >
-                  <span>Next: Symptoms</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <span>Next</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
             </motion.div>
           )}
 
-          {/* STEP 4: SYMPTOMS (Headache, Fatigue, Nausea, Dizziness, Custom) */}
+          {/* STEP 4: SYMPTOMS & NOTES */}
           {currentStep === 3 && (
             <motion.div
-              key="q-symptoms"
-              initial={{ opacity: 0, x: 12 }}
+              key="step-symptoms"
+              initial={{ opacity: 0, x: 10 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -12 }}
-              transition={{ duration: 0.2 }}
-              className="space-y-6"
+              exit={{ opacity: 0, x: -10 }}
+              transition={{ duration: 0.18 }}
+              className="space-y-5"
             >
-              <div>
-                <h2 className="text-lg font-medium text-[#1F2A2A]">
-                  Any symptoms to note?
-                </h2>
-                <p className="text-xs text-[#6C7A7A] mt-1">
-                  Select any sensations present today, or leave unselected if feeling clear.
-                </p>
-              </div>
+              <h2 className="text-base font-bold text-[#162020]">
+                Any symptoms today?
+              </h2>
 
               {/* Symptom chips */}
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5">
                 {commonSymptoms.map((sym) => {
                   const isSelected = selectedSymptoms.includes(sym);
                   return (
@@ -485,10 +451,10 @@ export const CheckInView: React.FC = () => {
                       key={sym}
                       type="button"
                       onClick={() => toggleSymptom(sym)}
-                      className={`touch-target px-4 py-2 text-xs font-medium rounded-xl border transition-all ${
+                      className={`touch-target px-3 py-1.5 text-xs font-medium rounded-xl border transition-all ${
                         isSelected
-                          ? 'bg-[#EEF3F2] border-[#2F7E79] text-[#2F7E79] font-semibold'
-                          : 'bg-[#F7F8F7] border-[#E2EAE8] text-[#6C7A7A] hover:bg-white'
+                          ? 'bg-[#EEF5F4] border-[#2F7E79] text-[#2F7E79] font-bold'
+                          : 'bg-[#F8FAF9] border-[#EAEFEF] text-[#708080] hover:bg-white'
                       }`}
                     >
                       {sym}
@@ -510,12 +476,12 @@ export const CheckInView: React.FC = () => {
                     }
                   }}
                   placeholder="Add custom symptom..."
-                  className="flex-1 bg-[#F7F8F7] border border-[#E2EAE8] rounded-xl px-3.5 py-2 text-xs text-[#1F2A2A] focus:border-[#2F7E79] focus:bg-white focus:outline-hidden"
+                  className="flex-1 bg-[#F8FAF9] border border-[#EAEFEF] rounded-xl px-3 py-2 text-xs text-[#162020] focus:border-[#2F7E79] focus:bg-white focus:outline-hidden"
                 />
                 <button
                   type="button"
                   onClick={handleAddCustomSymptom}
-                  className="touch-target px-3 py-2 bg-[#EEF3F2] text-[#2F7E79] hover:bg-[#2F7E79] hover:text-white rounded-xl text-xs font-medium transition-all"
+                  className="touch-target px-3 py-2 bg-[#EEF5F4] text-[#2F7E79] hover:bg-[#2F7E79] hover:text-white rounded-xl text-xs font-semibold transition-all"
                 >
                   <Plus className="w-4 h-4" />
                 </button>
@@ -523,13 +489,13 @@ export const CheckInView: React.FC = () => {
 
               {/* Selected custom tags */}
               {selectedSymptoms.some((s) => !commonSymptoms.includes(s)) && (
-                <div className="flex flex-wrap gap-1.5 pt-1">
+                <div className="flex flex-wrap gap-1.5">
                   {selectedSymptoms
                     .filter((s) => !commonSymptoms.includes(s))
                     .map((sym) => (
                       <span
                         key={sym}
-                        className="inline-flex items-center gap-1 bg-[#EEF3F2] text-[#2F7E79] text-xs font-medium px-2.5 py-1 rounded-lg"
+                        className="inline-flex items-center gap-1 bg-[#EEF5F4] text-[#2F7E79] text-xs font-medium px-2.5 py-1 rounded-lg"
                       >
                         {sym}
                         <X
@@ -543,31 +509,29 @@ export const CheckInView: React.FC = () => {
 
               {/* Optional brief note */}
               <div>
-                <label className="block text-xs font-medium text-[#1F2A2A] mb-1">
-                  Optional note for your timeline
-                </label>
                 <input
                   type="text"
                   value={note}
                   onChange={(e) => setNote(e.target.value)}
-                  placeholder="e.g. Worked under bright studio lights; feeling mild eye strain"
-                  className="w-full bg-[#F7F8F7] border border-[#E2EAE8] rounded-xl px-3.5 py-2 text-xs text-[#1F2A2A] focus:border-[#2F7E79] focus:bg-white focus:outline-hidden"
+                  placeholder="Optional timeline note..."
+                  className="w-full bg-[#F8FAF9] border border-[#EAEFEF] rounded-xl px-3 py-2 text-xs text-[#162020] focus:border-[#2F7E79] focus:bg-white focus:outline-hidden"
                 />
               </div>
 
-              <div className="pt-4 flex items-center justify-between border-t border-[#EEF3F2]">
+              <div className="pt-3 flex items-center justify-between border-t border-[#F0F4F3]">
                 <button
                   onClick={() => setCurrentStep(2)}
-                  className="text-xs font-medium text-[#6C7A7A] hover:text-[#1F2A2A]"
+                  className="inline-flex items-center gap-1 text-xs font-medium text-[#708080] hover:text-[#162020]"
                 >
-                  Back
+                  <ArrowLeft className="w-3.5 h-3.5" />
+                  <span>Back</span>
                 </button>
                 <button
                   onClick={handleSubmit}
-                  className="touch-target inline-flex items-center gap-2 bg-[#2F7E79] hover:bg-[#266864] text-white text-sm font-medium px-8 py-3 rounded-xl transition-all shadow-sm"
+                  className="touch-target inline-flex items-center gap-2 bg-[#2F7E79] hover:bg-[#266864] text-white text-xs font-bold px-6 py-2.5 rounded-xl transition-all shadow-xs"
                 >
                   <Sparkles className="w-4 h-4" />
-                  <span>Complete Check-In</span>
+                  <span>Save Check-In</span>
                 </button>
               </div>
             </motion.div>

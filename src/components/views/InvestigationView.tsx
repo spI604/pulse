@@ -86,12 +86,12 @@ export const InvestigationView: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto py-4 px-2 sm:px-4 space-y-6 pb-16">
       {/* Minimal Header */}
-      <div className="flex items-center justify-between border-b border-[#E2EAE8] pb-4">
+      <div className="flex items-center justify-between border-b border-[#EAEFEF] pb-4">
         <div>
-          <h1 className="text-2xl font-semibold text-[#1F2A2A]">
+          <h1 className="text-xl font-bold text-[#162020]">
             Health Replay™
           </h1>
-          <span className="text-xs text-[#6C7A7A]">
+          <span className="text-xs text-[#708080]">
             72-hour antecedent timeline before tension headache
           </span>
         </div>
@@ -100,7 +100,7 @@ export const InvestigationView: React.FC = () => {
         <div className="flex items-center gap-2">
           <button
             onClick={() => setIsPlaying(!isPlaying)}
-            className="touch-target inline-flex items-center gap-1.5 bg-[#2F7E79] hover:bg-[#266864] text-white text-xs font-bold px-3.5 py-1.5 rounded-xl transition-all shadow-xs"
+            className="touch-target inline-flex items-center gap-1.5 bg-[#2F7E79] hover:bg-[#266864] text-white text-xs font-bold px-3 py-1.5 rounded-xl transition-all shadow-xs"
           >
             {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
             <span>{isPlaying ? 'Pause' : 'Play Cascade'}</span>
@@ -111,7 +111,7 @@ export const InvestigationView: React.FC = () => {
               setIsPlaying(false);
               setSelectedEventId(mockHealthReplayEvents[0].id);
             }}
-            className="p-1.5 text-[#6C7A7A] hover:text-[#1F2A2A] rounded-lg hover:bg-white transition-colors"
+            className="p-1.5 text-[#708080] hover:text-[#162020] rounded-lg hover:bg-white transition-colors"
             title="Restart"
           >
             <RotateCcw className="w-3.5 h-3.5" />
@@ -120,7 +120,7 @@ export const InvestigationView: React.FC = () => {
       </div>
 
       {/* 72-Hour Scrubber */}
-      <div className="bg-white border border-[#E2EAE8] rounded-2xl p-4 sm:p-5 shadow-xs">
+      <div className="bg-white border border-[#EAEFEF] rounded-2xl p-4 shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
           {mockHealthReplayEvents.map((evt, idx) => {
             const isSelected = evt.id === selectedEventId;
@@ -134,21 +134,21 @@ export const InvestigationView: React.FC = () => {
                 }}
                 className={`touch-target p-3 rounded-xl border text-left transition-all ${
                   isSelected
-                    ? 'bg-[#EEF3F2] border-[#2F7E79] shadow-xs'
-                    : 'bg-[#F7F8F7] border-[#E2EAE8] hover:bg-white'
+                    ? 'bg-[#EEF5F4] border-[#2F7E79] shadow-xs'
+                    : 'bg-[#F8FAF9] border-[#EAEFEF] hover:bg-white'
                 }`}
               >
-                <div className="flex items-center justify-between mb-1.5">
+                <div className="flex items-center justify-between mb-1">
                   <span className="text-[10px] font-bold text-[#2F7E79]">
                     {evt.offsetHours === 0 ? 'Onset' : `T${evt.offsetHours}h`}
                   </span>
                   {getCategoryIcon(evt.category)}
                 </div>
 
-                <span className="text-xs font-bold text-[#1F2A2A] block truncate">
+                <span className="text-xs font-bold text-[#162020] block truncate">
                   {evt.title}
                 </span>
-                <span className="text-[11px] text-[#6C7A7A] block truncate">
+                <span className="text-[11px] text-[#708080] block truncate">
                   {evt.metricValue}
                 </span>
               </button>
@@ -161,22 +161,22 @@ export const InvestigationView: React.FC = () => {
       <AnimatePresence mode="wait">
         <motion.div
           key={selectedEvent.id}
-          initial={{ opacity: 0, y: 8 }}
+          initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.2 }}
-          className="bg-white border border-[#E2EAE8] rounded-2xl p-5 shadow-xs space-y-4"
+          exit={{ opacity: 0, y: -6 }}
+          transition={{ duration: 0.18 }}
+          className="bg-white border border-[#EAEFEF] rounded-2xl p-5 shadow-[0_1px_3px_rgba(0,0,0,0.02)] space-y-3"
         >
-          <div className="flex items-center justify-between border-b border-[#EEF3F2] pb-3">
+          <div className="flex items-center justify-between border-b border-[#F0F4F3] pb-3">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-[#EEF3F2] flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-[#EEF5F4] flex items-center justify-center">
                 {getCategoryIcon(selectedEvent.category)}
               </div>
               <div>
                 <span className="text-[11px] text-[#5F8F8B] font-medium block">
                   {selectedEvent.timeLabel}
                 </span>
-                <h3 className="text-base font-bold text-[#1F2A2A]">
+                <h3 className="text-sm font-bold text-[#162020]">
                   {selectedEvent.title}
                 </h3>
               </div>
@@ -187,11 +187,11 @@ export const InvestigationView: React.FC = () => {
             </span>
           </div>
 
-          <p className="text-xs text-[#1F2A2A] leading-relaxed">
+          <p className="text-xs text-[#162020] leading-relaxed">
             {selectedEvent.description}
           </p>
 
-          <div className="bg-[#F7F8F7] border border-[#E2EAE8] rounded-xl p-3 text-xs text-[#1F2A2A]">
+          <div className="bg-[#F8FAF9] border border-[#EAEFEF] rounded-xl p-3 text-xs text-[#162020]">
             <span className="font-semibold text-[#2F7E79] block mb-0.5">Correlation:</span>
             {selectedEvent.correlationNote}
           </div>
@@ -199,17 +199,17 @@ export const InvestigationView: React.FC = () => {
       </AnimatePresence>
 
       {/* Pattern Summary */}
-      <div className="bg-white border border-[#E2EAE8] rounded-2xl p-4 shadow-xs flex items-center justify-between gap-4">
+      <div className="bg-white border border-[#EAEFEF] rounded-2xl p-4 shadow-[0_1px_3px_rgba(0,0,0,0.02)] flex items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-[#EEF3F2] text-[#2F7E79] flex items-center justify-center shrink-0">
+          <div className="w-8 h-8 rounded-xl bg-[#EEF5F4] text-[#2F7E79] flex items-center justify-center shrink-0">
             <Brain className="w-4 h-4" />
           </div>
           <div className="text-xs">
-            <span className="font-bold text-[#1F2A2A] block">
+            <span className="font-bold text-[#162020] block">
               91% Algorithmic Pattern Match
             </span>
-            <span className="text-[#6C7A7A]">
-              Tri-Factor Cascade: Sleep Curtailment + Hydration Dip + Meal Delay
+            <span className="text-[#708080]">
+              Cascade: Sleep Curtailment + Hydration Dip + Meal Delay
             </span>
           </div>
         </div>

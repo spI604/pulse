@@ -11,7 +11,7 @@ import {
 } from '@/types/health';
 
 export const initialUserProfile: UserProfile = {
-  name: 'Arjun Sharma',
+  name: 'Karan Sharma',
   age: 32,
   gender: 'Male',
   height: `5'10" (178 cm)`,
@@ -300,7 +300,7 @@ export const mockHealthRecords: HealthRecord[] = [
 
 export const mockDoctorBriefData: DoctorBriefData = {
   patientSummary: {
-    name: 'Arjun Sharma',
+    name: 'Karan Sharma',
     age: 32,
     gender: 'Male',
     baselineDays: 94,

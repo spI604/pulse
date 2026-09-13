@@ -48,7 +48,7 @@ export const OnboardingView: React.FC = () => {
 
   const handleFinish = () => {
     setUserProfile({
-      name: name || 'Arjun Sharma',
+      name: name || 'Karan Sharma',
       age: parseInt(age, 10) || 32,
       gender: gender || 'Male',
       height: height || `5'10"`,
@@ -98,45 +98,40 @@ export const OnboardingView: React.FC = () => {
           {step === 0 && (
             <motion.div
               key="step-0"
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ type: 'spring', stiffness: 120, damping: 18 }}
-              className="bg-white border border-[#E2EAE8] rounded-3xl p-8 md:p-12 text-center shadow-[0_4px_24px_rgba(0,0,0,0.03)]"
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.2 }}
+              className="bg-white border border-[#EAEFEF] rounded-3xl p-8 md:p-12 text-center shadow-[0_2px_16px_rgba(0,0,0,0.03)]"
             >
               {/* Calm Pulsing Health Icon */}
-              <div className="relative w-20 h-20 rounded-3xl bg-[#EEF3F2] border border-[#E2EAE8] flex items-center justify-center mx-auto mb-6 text-[#2F7E79]">
-                <HeartPulse className="w-10 h-10" />
-                <motion.div
-                  animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0, 0.3] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                  className="absolute inset-0 rounded-3xl bg-[#2F7E79]"
-                />
+              <div className="relative w-16 h-16 rounded-2xl bg-[#EEF5F4] flex items-center justify-center mx-auto mb-6 text-[#2F7E79]">
+                <HeartPulse className="w-8 h-8" />
               </div>
 
-              <div className="inline-flex items-center gap-1.5 bg-[#EEF3F2] text-[#2F7E79] px-3.5 py-1 rounded-full text-xs font-semibold mb-4 border border-[#E2EAE8]">
+              <div className="inline-flex items-center gap-1.5 bg-[#EEF5F4] text-[#2F7E79] px-3 py-1 rounded-full text-xs font-semibold mb-4">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Preventive Health Intelligence</span>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl font-semibold text-[#1F2A2A] tracking-tight mb-4 leading-tight">
+              <h1 className="text-3xl sm:text-4xl font-bold text-[#162020] tracking-tight mb-3">
                 PULSE
               </h1>
 
-              <blockquote className="text-lg sm:text-xl font-normal text-[#2F7E79] mb-4 italic">
+              <blockquote className="text-base sm:text-lg font-medium text-[#2F7E79] mb-4 italic">
                 &ldquo;Learn your normal. Notice when you&rsquo;re different.&rdquo;
               </blockquote>
 
-              <p className="text-sm text-[#6C7A7A] max-w-md mx-auto leading-relaxed mb-8">
-                A personal health companion that quietly watches over you. We build your physiological baseline from daily rest, heart rate, hydration, and activity—detecting patterns before they become issues.
+              <p className="text-xs text-[#708080] max-w-md mx-auto leading-relaxed mb-8">
+                Build your individualized physiological baseline from daily rest, heart rate, hydration, and activity—detecting patterns before they become issues.
               </p>
 
               <button
                 onClick={() => setStep(1)}
-                className="touch-target inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-[#2F7E79] hover:bg-[#266864] text-white font-medium px-8 py-3.5 rounded-2xl text-sm shadow-sm hover:shadow transition-all duration-150"
+                className="touch-target inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-[#2F7E79] hover:bg-[#266864] text-white font-semibold px-8 py-3 rounded-2xl text-xs shadow-xs hover:shadow transition-all"
               >
                 <span>Get Started</span>
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </motion.div>
           )}
@@ -167,7 +162,7 @@ export const OnboardingView: React.FC = () => {
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="e.g. Arjun Sharma"
+                    placeholder="e.g. Karan Sharma"
                     className="touch-target w-full bg-[#F7F8F7] border border-[#E2EAE8] rounded-xl px-4 py-2.5 text-sm text-[#1F2A2A] focus:border-[#2F7E79] focus:bg-white focus:outline-hidden transition-all"
                   />
                 </div>

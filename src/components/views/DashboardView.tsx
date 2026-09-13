@@ -7,12 +7,11 @@ import { MetricCard } from '@/components/ui/MetricCard';
 import { InsightCard } from '@/components/ui/InsightCard';
 import { EmptyState } from '@/components/ui/EmptyState';
 import {
-  Sparkles,
   CheckCircle,
   PenLine,
   FileText,
-  Activity,
   Compass,
+  ArrowRight,
 } from 'lucide-react';
 
 export const DashboardView: React.FC = () => {
@@ -28,15 +27,15 @@ export const DashboardView: React.FC = () => {
 
   if (demoMode === 'empty') {
     return (
-      <div className="space-y-6 max-w-5xl mx-auto py-4">
-        <h1 className="text-2xl font-semibold text-[#1F2A2A]">
+      <div className="space-y-6 max-w-4xl mx-auto py-4">
+        <h1 className="text-xl font-bold text-[#1F2A2A]">
           {getGreeting()}, {userProfile.name}
         </h1>
 
         <EmptyState
           icon={Compass}
           title="Getting Started"
-          message="Complete your first check-in to start building your personal baseline."
+          message="Complete your first check-in to begin building your personal baseline."
           actionLabel="Start First Check-In"
           onAction={() => setActiveTab('check-in')}
           secondaryActionLabel="Log Journal"
@@ -48,25 +47,24 @@ export const DashboardView: React.FC = () => {
   }
 
   return (
-    <div className="space-y-6 max-w-5xl mx-auto pb-12">
-      {/* 1. Health Summary Header */}
+    <div className="space-y-5 max-w-4xl mx-auto pb-12">
+      {/* 1. Health Summary Greeting */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-[#1F2A2A] tracking-tight">
+          <h1 className="text-xl font-bold text-[#162020] tracking-tight">
             {getGreeting()}, {userProfile.name}
           </h1>
-          <p className="text-xs text-[#6C7A7A] mt-0.5">
-            Physiological rhythm is steady today.
-          </p>
+          <span className="text-xs text-[#708080]">
+            Physiological rhythm is steady today
+          </span>
         </div>
 
-        <div className="flex items-center gap-1.5 text-xs text-[#2F7E79] bg-[#EEF3F2] px-3 py-1 rounded-full font-medium">
-          <span className="w-2 h-2 rounded-full bg-[#74A57F] animate-pulse" />
-          <span>94d Calibrated</span>
-        </div>
+        <span className="text-xs font-semibold text-[#2F7E79] bg-[#EEF5F4] px-2.5 py-0.5 rounded-full">
+          94d Calibrated
+        </span>
       </div>
 
-      {/* Health Score Ring */}
+      {/* Health Score Ring Hero */}
       <HealthScoreRing
         score={88}
         statusText="Optimal Baseline"
@@ -74,21 +72,19 @@ export const DashboardView: React.FC = () => {
       />
 
       {/* 2. Today's State Cards */}
-      <div className="space-y-2.5">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1.5 text-sm font-semibold text-[#1F2A2A]">
-            <Activity className="w-4 h-4 text-[#2F7E79]" />
-            <span>Today&apos;s Vitals</span>
-          </div>
+      <div className="space-y-2">
+        <div className="flex items-center justify-between text-xs">
+          <span className="font-bold text-[#162020]">Today&apos;s Vitals</span>
           <button
             onClick={() => setActiveTab('twin')}
-            className="text-xs text-[#5F8F8B] hover:text-[#2F7E79]"
+            className="text-[#2F7E79] font-medium hover:underline flex items-center gap-0.5"
           >
-            Digital Twin →
+            <span>Digital Twin</span>
+            <ArrowRight className="w-3 h-3" />
           </button>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
           {vitals.map((metric, idx) => (
             <MetricCard
               key={metric.id}
@@ -101,63 +97,62 @@ export const DashboardView: React.FC = () => {
       </div>
 
       {/* 3. AI Insights */}
-      <div className="space-y-2.5">
-        <div className="flex items-center gap-1.5 text-sm font-semibold text-[#1F2A2A]">
-          <Sparkles className="w-4 h-4 text-[#2F7E79]" />
-          <span>AI Insights</span>
-        </div>
+      <div className="space-y-2">
+        <span className="text-xs font-bold text-[#162020] block">
+          AI Insights
+        </span>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
           {aiInsights.slice(0, 2).map((insight, idx) => (
             <InsightCard key={insight.id} insight={insight} index={idx} />
           ))}
         </div>
       </div>
 
-      {/* 4. Quick Actions */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+      {/* 4. Sleek Quick Actions Strip */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
         <button
           onClick={() => setActiveTab('check-in')}
-          className="touch-target group bg-white border border-[#E2EAE8] hover:border-[#2F7E79] rounded-2xl p-3.5 text-left shadow-xs transition-all flex items-center gap-3"
+          className="touch-target group bg-white border border-[#EAEFEF] hover:border-[#2F7E79]/30 rounded-2xl p-3 text-left shadow-[0_1px_3px_rgba(0,0,0,0.02)] transition-all flex items-center gap-3"
         >
-          <div className="w-9 h-9 rounded-xl bg-[#EEF3F2] group-hover:bg-[#2F7E79] text-[#2F7E79] group-hover:text-white flex items-center justify-center transition-colors">
+          <div className="w-8 h-8 rounded-lg bg-[#EEF5F4] group-hover:bg-[#2F7E79] text-[#2F7E79] group-hover:text-white flex items-center justify-center transition-colors">
             <CheckCircle className="w-4 h-4" />
           </div>
           <div>
-            <span className="text-xs font-bold text-[#1F2A2A] block group-hover:text-[#2F7E79]">
+            <span className="text-xs font-bold text-[#162020] block group-hover:text-[#2F7E79]">
               Daily Check-In
             </span>
-            <span className="text-[11px] text-[#6C7A7A]">30-second log</span>
+            <span className="text-[10px] text-[#8FA0A0]">30-second log</span>
           </div>
         </button>
 
         <button
           onClick={() => setActiveTab('journal')}
-          className="touch-target group bg-white border border-[#E2EAE8] hover:border-[#2F7E79] rounded-2xl p-3.5 text-left shadow-xs transition-all flex items-center gap-3"
+          className="touch-target group bg-white border border-[#EAEFEF] hover:border-[#2F7E79]/30 rounded-2xl p-3 text-left shadow-[0_1px_3px_rgba(0,0,0,0.02)] transition-all flex items-center gap-3"
         >
-          <div className="w-9 h-9 rounded-xl bg-[#EEF3F2] group-hover:bg-[#2F7E79] text-[#2F7E79] group-hover:text-white flex items-center justify-center transition-colors">
+          <div className="w-8 h-8 rounded-lg bg-[#EEF5F4] group-hover:bg-[#2F7E79] text-[#2F7E79] group-hover:text-white flex items-center justify-center transition-colors">
             <PenLine className="w-4 h-4" />
           </div>
           <div>
-            <span className="text-xs font-bold text-[#1F2A2A] block group-hover:text-[#2F7E79]">
+            <span className="text-xs font-bold text-[#162020] block group-hover:text-[#2F7E79]">
               Health Journal
             </span>
-            <span className="text-[11px] text-[#6C7A7A]">Natural text extraction</span>
+            <span className="text-[10px] text-[#8FA0A0]">Text signal extraction</span>
           </div>
         </button>
 
         <button
           onClick={() => setActiveTab('brief')}
-          className="touch-target group bg-white border border-[#E2EAE8] hover:border-[#2F7E79] rounded-2xl p-3.5 text-left shadow-xs transition-all flex items-center gap-3"
+          className="touch-target group bg-white border border-[#EAEFEF] hover:border-[#2F7E79]/30 rounded-2xl p-3 text-left shadow-[0_1px_3px_rgba(0,0,0,0.02)] transition-all flex items-center gap-3"
         >
-          <div className="w-9 h-9 rounded-xl bg-[#EEF3F2] group-hover:bg-[#2F7E79] text-[#2F7E79] group-hover:text-white flex items-center justify-center transition-colors">
+          <div className="w-8 h-8 rounded-lg bg-[#EEF5F4] group-hover:bg-[#2F7E79] text-[#2F7E79] group-hover:text-white flex items-center justify-center transition-colors">
             <FileText className="w-4 h-4" />
           </div>
           <div>
-            <span className="text-xs font-bold text-[#1F2A2A] block group-hover:text-[#2F7E79]">
+            <span className="text-xs font-bold text-[#162020] block group-hover:text-[#2F7E79]">
               Doctor Brief
             </span>
-            <span className="text-[11px] text-[#6C7A7A]">Consultation summary</span>
+            <span className="text-[10px] text-[#8FA0A0]">Consultation report</span>
           </div>
         </button>
       </div>
